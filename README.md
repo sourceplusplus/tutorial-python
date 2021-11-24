@@ -5,7 +5,7 @@
 
 A sample app for Python using [Source++](https://github.com/sourceplusplus/live-platform).
 
-![](./img/tut-java.png)
+![](./img/tut-python.png)
 
 ## Prerequisites
 

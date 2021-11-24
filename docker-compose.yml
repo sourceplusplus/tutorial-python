@@ -1,0 +1,51 @@
+version: '3.3'
+services:
+  todoapp:
+    container_name: todoapp
+    build:
+      context: .
+      dockerfile: Dockerfile-todoapp
+    depends_on:
+      - spp-platform
+    ports:
+      - "8080:8080"
+    environment:
+      - PYTHONUNBUFFERED=0
+  redis:
+    image: redis:6.2.1
+    container_name: redis
+    hostname: redis
+  spp-platform:
+    container_name: spp-platform
+    image: sourceplusplus/spp-platform:latest
+    hostname: spp-platform
+    ports:
+      - "5445:5445"
+      - "5450:5450"
+      - "5455:5455"
+    depends_on:
+      - redis
+    links:
+      - redis
+    environment:
+      - SPP_CLUSTER_URL=localhost
+      - SPP_CLUSTER_NAME=docker
+      - SPP_REDIS_HOST=redis
+      - SPP_SKYWALKING_HOST=skywalking-oap
+      - SPP_SYSTEM_ACCESS_TOKEN=change-me
+      - SPP_DISABLE_TLS=true
+      - SPP_DISABLE_JWT=true
+  skywalking-oap:
+    container_name: skywalking-oap
+    image: sourceplusplus/spp-oap-server:latest
+    hostname: skywalking-oap
+    ports:
+      - "11800:11800"
+    depends_on:
+      - spp-platform
+    links:
+      - spp-platform
+    environment:
+      - SPP_PLATFORM_HOST=spp-platform
+      - SPP_PLATFORM_PORT=5460
+      - SPP_DISABLE_TLS=true

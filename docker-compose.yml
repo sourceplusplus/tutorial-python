@@ -9,8 +9,6 @@ services:
       - spp-platform
     ports:
       - "8080:8080"
-    environment:
-      - PYTHONUNBUFFERED=0
   redis:
     image: redis:6.2.1
     container_name: redis

@@ -3,6 +3,8 @@
 To help you learn how to utilize Source++, we've prepared a few manually introduced bugs.
 These scenarios will make sure you understand how to create and use both live breakpoints and live logs for debugging live applications.
 
+> Note: The goals of the bug scenarios are to find bugs, not solve them.
+
 # Bug scenarios
 
 ## Level: Beginner
